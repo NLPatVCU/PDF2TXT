@@ -1,0 +1,18 @@
+Metadata-Version: 1.1
+Name: pdf2txt
+Version: 0.1
+Summary: Converts a pdf document to text
+Home-page: https://github.com/NLPatVCU/PDF2TXT
+Author: Shekinah Veeravalli, Bridget McInnes
+Author-email: veeravalliss@vcu.edu
+License: UNKNOWN
+Description: # PDF2TXT
+        Converts a pdf document to text. 
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Natural Language :: English
+Classifier: Topic :: Text Processing :: Linguistic
+Classifier: Intended Audience :: Science/Research
