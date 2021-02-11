@@ -4,6 +4,18 @@ PDF2TXT can be used to either convert a single .pdf file to a .txt file or all .
 
 ![alt text](https://nlp.cs.vcu.edu/images/Edit_NanomedicineDatabase.png "Nanoinformatics")
 
+Installation
+============
+To install PDF2TXT:
+```python
+git clone https://github.com/NLPatVCU/PDF2TXT.git
+```
+You would also need to install the Haystack framework
+```python
+git clone https://github.com/deepset-ai/haystack.git
+```
+If you experience any difficulties, try visiting their site: https://github.com/deepset-ai/haystack
+
 Use
 ===
 To convert a single file, run:
