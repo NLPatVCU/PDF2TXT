@@ -1,4 +1,4 @@
-import setuptools, haystack
+import setuptools
 
 def readme():
     with open('README.md') as f:
@@ -22,7 +22,7 @@ setuptools.setup(
         'Intended Audience :: Science/Research'
     ],
     install_requires=[
-     
+     'farm-haystack @ git+https://github.com/deepset-ai/haystack.git@v0.7.0'
     ],
 )
 

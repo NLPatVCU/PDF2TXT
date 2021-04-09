@@ -3,4 +3,5 @@ setup.py
 pdf2txt.egg-info/PKG-INFO
 pdf2txt.egg-info/SOURCES.txt
 pdf2txt.egg-info/dependency_links.txt
+pdf2txt.egg-info/requires.txt
 pdf2txt.egg-info/top_level.txt
