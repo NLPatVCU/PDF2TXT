@@ -12,7 +12,7 @@ git clone https://github.com/NLPatVCU/PDF2TXT.git
 ```
 You would also need to install the Haystack framework
 ```python
-git clone https://github.com/deepset-ai/haystack.git
+pip install farm-haystack
 ```
 If you experience any difficulties, try visiting their site: https://github.com/deepset-ai/haystack
 
