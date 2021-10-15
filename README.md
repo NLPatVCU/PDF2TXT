@@ -14,10 +14,17 @@ You would also need to install the Haystack framework
 ```python
 pip install farm-haystack
 ```
+When running PDF2TXT in a python3 venv, install haystack using
+'''python
+pip3 install farm-haystack
+'''
+
 If you experience any difficulties, try visiting their site: https://github.com/deepset-ai/haystack
 
 Use
 ===
+When running PDF2TXT in a python3 venv, all commands must be preceded by "python3"
+
 To convert a single file, run:
 ```python
 pdf2txt.py -f <input_file_path>
