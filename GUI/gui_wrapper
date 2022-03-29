@@ -1,4 +1,4 @@
-#1/bin/bash
+#!/bin/bash
 
 # this is the shell script wrapper used by pdf2txt to build the file structure and install what needs to be installed
 
