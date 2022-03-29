@@ -1,0 +1,24 @@
+#1/bin/bash
+
+# this is the shell script wrapper used by pdf2txt to build the file structure and install what needs to be installed
+
+if [ "$1" == "i" ]; then
+	# builds file structure and installs pdf2txt
+	mkdir /home/$USER/Packages/pdf2txt_venv_gui/
+	python3 -m venv /home/$USER/Packages/pdf2txt_venv_gui/
+	cd /home/$USER/Packages/pdf2txt_venv_gui
+
+	# the installation of the dependencies and whatnot are done within the virtual environment we just built
+	source bin/activate
+	git clone https://github.com/NLPatVCU/PDF2TXT.git >& /dev/null
+	pip install pymilvus==1.0.0 >& /dev/null
+	pip3 install farm-haystack==1.0.0 >& /dev/null
+	deactivate
+	echo "done"
+else
+	# this runs the program itself. This is in the shell script wrapper and not the program itself because we need to be running in the venv.
+	cd /home/$USER/Packages/pdf2txt_venv_gui
+	source bin/activate
+	cd /home/makraw/Packages/pdf2txt_venv_gui/PDF2TXT/pdf2txt
+	python3 pdf2txt.py $1 $2 $3 $4
+fi
