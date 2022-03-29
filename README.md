@@ -12,9 +12,10 @@ To install PDF2TXT:
 ```python
 git clone https://github.com/NLPatVCU/PDF2TXT.git
 ```
-You would also need to install the Haystack framework
+You would also need to install the Haystack framework and milvus.
 ```python
-pip3 install farm-haystack
+pip3 install pymilvus==1.0.0
+pip3 install farm-haystack==1.0.0
 ```
 If you experience any difficulties, try visiting their site: https://github.com/deepset-ai/haystack
 
