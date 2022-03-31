@@ -19,6 +19,6 @@ else
 	# this runs the program itself. This is in the shell script wrapper and not the program itself because we need to be running in the venv.
 	cd /home/$USER/Packages/pdf2txt_venv_gui
 	source bin/activate
-	cd /home/makraw/Packages/pdf2txt_venv_gui/PDF2TXT/pdf2txt
+	cd /home/$USER/Packages/pdf2txt_venv_gui/PDF2TXT/pdf2txt
 	python3 pdf2txt.py $1 $2 $3 $4
 fi
