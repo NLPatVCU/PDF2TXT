@@ -123,7 +123,7 @@ public class pdf2txtGUI extends JFrame{
                     p.destroy();
 
                     //this part tells the user it worked and shows them where the output is
-                    popupMessage.setText("Conversion complete! converted file(s) located at" + outPath);
+                    popupMessage.setText("Conversion complete! converted file(s) located at " + outPath);
                     popup.add(popupMessage);
 
                 } catch (IOException | InterruptedException ex) {
