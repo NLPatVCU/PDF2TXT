@@ -203,33 +203,35 @@ public class pdf2txtGUI extends JFrame{
             popup.add(popupMessage);
         }
 
-        //control for input or output file paths that contain spaces
-        else if (inPath.contains(" ")) {
-            Pattern pattern = Pattern.compile("(/([^/]* +[^/]*))"); //this ugly regex looks for anything with the pattern /file but there's a space/ or /end of things with spaces
-            Matcher matcher = pattern.matcher(inPath);
-            while (matcher.find()) {
-                String original = matcher.group();
-                String convert = "/\"";
-                if (matcher.group().endsWith("/")) {convert += matcher.group(2) + "\"/";} //this logic checks if it's the last thing and makes sure not to add another slash if it is
-                else {convert += matcher.group(2) + "\"";}
-                inPath = inPath.replace(original, convert);
-            }
-        }
-        else if (outPath.contains(" '")){
-            Pattern pattern = Pattern.compile("(/([^/]* +[^/]*))"); //this ugly regex looks for anything with the pattern /file but there's a space/ or /end of things with spaces
-            Matcher matcher = pattern.matcher(outPath);
-            while (matcher.find()) {
-                String original = matcher.group();
-                String convert = "/\"";
-                if (matcher.group().endsWith("/")) {convert += matcher.group(2) + "\"/";} //this logic checks if it's the last thing and makes sure not to add another slash if it is
-                else {convert += matcher.group(2) + "\"";}
-                outPath = outPath.replace(original, convert);
-            }
-        }
+
 
 
         //this else will run if no errors are found prior to the run attempt
         else {
+            //control for input or output file paths that contain spaces
+            if (inPath.contains(" ")) {
+                Pattern pattern = Pattern.compile("(/([^/]* +[^/]*))"); //this ugly regex looks for anything with the pattern /file but there's a space/ or /end of things with spaces
+                Matcher matcher = pattern.matcher(inPath);
+                while (matcher.find()) {
+                    String original = matcher.group();
+                    String convert = "/\"";
+                    if (matcher.group().endsWith("/")) {convert += matcher.group(2) + "\"/";} //this logic checks if it's the last thing and makes sure not to add another slash if it is
+                    else {convert += matcher.group(2) + "\"";}
+                    inPath = inPath.replace(original, convert);
+                }
+            }
+            else if (outPath.contains(" '")){
+                Pattern pattern = Pattern.compile("(/([^/]* +[^/]*))"); //this ugly regex looks for anything with the pattern /file but there's a space/ or /end of things with spaces
+                Matcher matcher = pattern.matcher(outPath);
+                while (matcher.find()) {
+                    String original = matcher.group();
+                    String convert = "/\"";
+                    if (matcher.group().endsWith("/")) {convert += matcher.group(2) + "\"/";} //this logic checks if it's the last thing and makes sure not to add another slash if it is
+                    else {convert += matcher.group(2) + "\"";}
+                    outPath = outPath.replace(original, convert);
+                }
+            }
+            
             //define the args
             if (wholeFile) {
                 convertDirectory = "-d";
