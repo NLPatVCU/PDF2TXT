@@ -17,6 +17,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class pdf2txtGUI extends JFrame{
     // this actually does the GUI program itself
@@ -199,6 +201,19 @@ public class pdf2txtGUI extends JFrame{
         else if (!Files.exists(Paths.get(outPath))){
             popupMessage.setText("conversion error: no or invalid output path selected. Please specify a valid path.");
             popup.add(popupMessage);
+        }
+
+        //control for input or output file paths that contain spaces
+        else if (inPath.contains(" ")) {
+            Pattern pattern = Pattern.compile("(/([^/]* +[^/]*))"); //this ugly regex looks for anything with the pattern /file but there's a space/ or /end of things with spaces
+            Matcher matcher = pattern.matcher(inPath);
+            while (matcher.find()) {
+                String original = matcher.group();
+                String convert = "/\"";
+                if (matcher.group().endsWith("/")) {convert += matcher.group(2) + "\"/";} //this logic checks if it's the last thing and makes sure not to add another slash if it is
+                else {convert += matcher.group(2) + "\"";}
+                inPath = inPath.replace(original, convert);
+            }
         }
 
 
