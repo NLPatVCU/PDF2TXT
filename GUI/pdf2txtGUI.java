@@ -2,9 +2,9 @@
  *
  * This program was Written by Nicolas Amselle for use by the Nano-NLP lab
  * it is a graphical wrapper program that handles running the lab's PDF to TXT converter
- * the latest changes made 4/2/22
+ * the latest changes made 4/4/22
  *
- * Version 1.2.0
+ * Version 1.2.1
  *
 */
 
@@ -213,6 +213,17 @@ public class pdf2txtGUI extends JFrame{
                 if (matcher.group().endsWith("/")) {convert += matcher.group(2) + "\"/";} //this logic checks if it's the last thing and makes sure not to add another slash if it is
                 else {convert += matcher.group(2) + "\"";}
                 inPath = inPath.replace(original, convert);
+            }
+        }
+        else if (outPath.contains(" '")){
+            Pattern pattern = Pattern.compile("(/([^/]* +[^/]*))"); //this ugly regex looks for anything with the pattern /file but there's a space/ or /end of things with spaces
+            Matcher matcher = pattern.matcher(outPath);
+            while (matcher.find()) {
+                String original = matcher.group();
+                String convert = "/\"";
+                if (matcher.group().endsWith("/")) {convert += matcher.group(2) + "\"/";} //this logic checks if it's the last thing and makes sure not to add another slash if it is
+                else {convert += matcher.group(2) + "\"";}
+                outPath = outPath.replace(original, convert);
             }
         }
 
