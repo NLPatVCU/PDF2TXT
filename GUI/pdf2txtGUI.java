@@ -2,9 +2,9 @@
  *
  * This program was Written by Nicolas Amselle for use by the Nano-NLP lab
  * it is a graphical wrapper program that handles running the lab's PDF to TXT converter
- * the latest changes made 4/4/22
+ * the latest changes made 4/12/22
  *
- * Version 1.2.1
+ * Version 1.3.2
  *
 */
 
@@ -17,8 +17,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class pdf2txtGUI extends JFrame{
     // this actually does the GUI program itself
@@ -107,7 +105,13 @@ public class pdf2txtGUI extends JFrame{
         run.setBounds(200, 255, 150, 40);
         run.setFont(new Font(run.getFont().getFontName(), Font.PLAIN, 20));
         window.add(run);
-        run.addActionListener(e -> run(infile.getText(), outfile.getText(), wholeFile.isSelected()));
+        run.addActionListener(e -> Run(infile.getText(), outfile.getText(), wholeFile.isSelected()));
+
+        // a button to open the help menu
+        JButton help = new JButton("help menu");
+        help.setBounds(450, 265, 110, 30);
+        window.add(help);
+        help.addActionListener(e -> HelpMenu());
 
         //show the window
         window.setVisible(true);
@@ -155,7 +159,7 @@ public class pdf2txtGUI extends JFrame{
     }
 
     //this method handles running the program. it is set apart from the rest for readability reasons.
-    public static void run(String inPath, String outPath, boolean wholeFile){
+    public static void Run(String inPath, String outPath, boolean wholeFile){
         String convertDirectory = "-f";
 
         //build the message to tell the user what happened
@@ -197,41 +201,20 @@ public class pdf2txtGUI extends JFrame{
             popup.add(popupMessage);
         }
 
-        //verify that the output file path is valid
+        //verify that the output file path exists
         else if (!Files.exists(Paths.get(outPath))){
             popupMessage.setText("conversion error: no or invalid output path selected. Please specify a valid path.");
             popup.add(popupMessage);
         }
 
-
-
+        //make sure that the file path doesn't have any spaces
+        else if (outPath.contains(" ") || inPath.contains(" ")){
+            popupMessage.setText("conversion error: file path cannot contain spaces");
+            popup.add(popupMessage);
+        }
 
         //this else will run if no errors are found prior to the run attempt
         else {
-            //control for input or output file paths that contain spaces
-            if (inPath.contains(" ")) {
-                Pattern pattern = Pattern.compile("(/([^/]* +[^/]*))"); //this ugly regex looks for anything with the pattern /file but there's a space/ or /end of things with spaces
-                Matcher matcher = pattern.matcher(inPath);
-                while (matcher.find()) {
-                    String original = matcher.group();
-                    String convert = "/\"";
-                    if (matcher.group().endsWith("/")) {convert += matcher.group(2) + "\"/";} //this logic checks if it's the last thing and makes sure not to add another slash if it is
-                    else {convert += matcher.group(2) + "\"";}
-                    inPath = inPath.replace(original, convert);
-                }
-            }
-            else if (outPath.contains(" '")){
-                Pattern pattern = Pattern.compile("(/([^/]* +[^/]*))"); //this ugly regex looks for anything with the pattern /file but there's a space/ or /end of things with spaces
-                Matcher matcher = pattern.matcher(outPath);
-                while (matcher.find()) {
-                    String original = matcher.group();
-                    String convert = "/\"";
-                    if (matcher.group().endsWith("/")) {convert += matcher.group(2) + "\"/";} //this logic checks if it's the last thing and makes sure not to add another slash if it is
-                    else {convert += matcher.group(2) + "\"";}
-                    outPath = outPath.replace(original, convert);
-                }
-            }
-            
             //define the args
             if (wholeFile) {
                 convertDirectory = "-d";
@@ -265,5 +248,23 @@ public class pdf2txtGUI extends JFrame{
 
         //show the results window to the user.
         popup.setVisible(true);
+    }
+
+    //this method handles opening the help menu
+    public static void HelpMenu(){
+        JFrame helpWindow = new JFrame("help");
+        helpWindow.setSize(700, 400);
+
+        JTextArea help = new JTextArea("In order to convert files with pdf2txt:\n" +
+                "\nput the folder with the files you want to convert onto this computer\nand make a new file for the output.\n" +
+                "\nuse the 'browse' button to select the path to each file\n" +
+                "\nclick run. if you did anything wrong there will be an error\nmessage that should explain what went wrong.\n" +
+                "\nif you still cant figure out the error after checking your\nfiles, reach out to another lab member for help.\n");
+        help.setFont(new Font(help.getFont().getFontName(), Font.PLAIN, 20));
+        help.setEditable(false);
+        help.setLineWrap(true);
+        helpWindow.add(help);
+        helpWindow.setLocationRelativeTo(null);
+        helpWindow.setVisible(true);
     }
 }
