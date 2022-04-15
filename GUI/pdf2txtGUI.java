@@ -2,9 +2,9 @@
  *
  * This program was Written by Nicolas Amselle for use by the Nano-NLP lab
  * it is a graphical wrapper program that handles running the lab's PDF to TXT converter
- * the latest changes made 4/12/22
+ * the latest changes made 4/15/22
  *
- * Version 1.3.2
+ * Version 1.3.3
  *
 */
 
@@ -215,6 +215,13 @@ public class pdf2txtGUI extends JFrame{
 
         //this else will run if no errors are found prior to the run attempt
         else {
+            //give the user a window that says that it's working
+            JFrame runAlert = new JFrame("Converting, please wait...");
+            runAlert.setSize(300, 0);
+            runAlert.setLayout(null);
+            runAlert.setLocationRelativeTo(null);
+
+
             //define the args
             if (wholeFile) {
                 convertDirectory = "-d";
@@ -224,9 +231,11 @@ public class pdf2txtGUI extends JFrame{
 
             //this calls the wrapper to run it
             try {
+                runAlert.setVisible(true);
                 Process p = Runtime.getRuntime().exec(runScript);
                 p.waitFor();
                 p.destroy();
+                runAlert.setVisible(false);
 
                 //check that there was actually something output to the output destination
                 File finalDestination = new File(outPath);
